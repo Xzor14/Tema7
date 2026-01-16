@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@layer base {
+  html {
+    
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-charcoal text-white font-sans overflow-x-hidden;
+    /* Tekstur Noise Halus Global */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  /* Custom Selection Color */
+  ::selection {
+    @apply bg-gold-luxury/30 text-gold-luxury-light;
+  }
+}
+
+@layer components {
+  /* Panel Kaca Mewah */
+  .glass-panel {
+    @apply backdrop-blur-md bg-charcoal-light/40 border border-white/10 shadow-glass;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+  }
+
+  /* Efek Kilau Emas pada Teks */
+  .text-shimmer {
+    background: linear-gradient(
+      to right, 
+      #D4AF37 20%, 
+      #FDE68A 50%, 
+      #D4AF37 80%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShine 4s linear infinite;
+  }
+
+  /* Animasi Kunang-kunang (Fireflies) */
+  .firefly {
+    @apply absolute rounded-full bg-gold-luxury pointer-events-none;
+    box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.8);
+    opacity: 0;
+  }
+}
+
+/* Animasi Keyframes Tambahan */
+@keyframes textShine {
+  to { background-position: 200% center; }
+}
+
+@keyframes fly {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  20% { opacity: 0.8; }
+  50% { transform: translate(30px, -50px) scale(1.2); opacity: 0.4; }
+  80% { opacity: 0.8; }
+  100% { transform: translate(-30px, -100px) scale(1); opacity: 0; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-charcoal;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gold-luxury/20 rounded-full hover:bg-gold-luxury/40 transition-colors;
+}
+
+/* Efek Vignette Global */
+.vignette-overlay {
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  @apply fixed inset-0 pointer-events-none z-[60];
+}
+
+/* Utilitas khusus untuk Font Script agar lebih tajam */
+.font-script {
+  font-family: 'Pinyon Script', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.floral-animate {
+  animation: floralIn 1.8s ease-out forwards,
+             floralFloat 6s ease-in-out infinite;
+}
+
+@keyframes floralIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) rotate(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.1) rotate(0deg);
+  }
+}
+
+@keyframes floralFloat {
+  0%, 100% {
+    transform: scale(1.1) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateY(-8px);
+  }
+}
+/* ================= LUXURY FLORAL BACKGROUND ================= */
+
+.lux-floral {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.14;
+  filter: blur(0.6px);
+  max-width: none;
+  animation:
+    floatSlow 12s ease-in-out infinite,
+    glowPulse 6s ease-in-out infinite;
+}
+
+/* SIDE FLORALS */
+.lux-floral.left {
+  width: 460px;
+  left: -240px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-18deg);
+}
+
+.lux-floral.right {
+  width: 460px;
+  right: -240px;
+  top: 50%;
+  transform: translateY(-50%) rotate(200deg);
+  animation-delay: 2s;
+}
+
+/* TOP & BOTTOM */
+.lux-floral.top {
+  width: 380px;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  opacity: 0.1;
+  animation-delay: 1s;
+}
+
+.lux-floral.bottom {
+  width: 380px;
+  bottom: -220px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  opacity: 0.1;
+  animation-delay: 3s;
+}
+
+/* FLOATING */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  50% {
+    transform: translateY(-54%) translateX(14px) scale(1.035);
+  }
+}
+
+/* GOLDEN GLOW */
+@keyframes glowPulse {
+  0%, 100% {
+    filter: blur(0.6px) brightness(1);
+  }
+  50% {
+    filter: blur(0.9px) brightness(1.15);
+  }
+}
+
+/* MOBILE TUNING */
+@media (max-width: 768px) {
+  .lux-floral {
+    opacity: 0.08;
+  }
+  .lux-floral.left,
+  .lux-floral.right {
+    width: 300px;
+  }
+}
+/* --- GLOBAL BACKGROUND PATTERNS --- */
+
+/* 1. Untuk Nuansa Klasik/Bunga */
+.bg-pattern-royal {
+  background-image: url('https://www.transparenttextures.com/patterns/black-thread-light.png');
+  opacity: 0.03; /* Sesuaikan transparansi */
+}
+
+/* 2. Untuk Nuansa Modern/Film */
+.bg-pattern-noise {
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.05;
+}
+
+/* 3. Untuk Nuansa Geometris/Struktur */
+.bg-pattern-geo {
+  background-image: url('https://www.transparenttextures.com/patterns/hexellence.png');
+  opacity: 0.03;
+}
+
+/* Helper agar background memenuhi area */
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  mix-blend-mode: overlay; /* Agar menyatu dengan warna charcoal */
+}
+
